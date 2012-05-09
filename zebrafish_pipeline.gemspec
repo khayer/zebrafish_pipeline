@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
 
   s.files         = `git ls-files -- {lib,bin}/*`.split("\n")
   #s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   << `git ls-files -- {bin}/*`.split("\n")
+  s.executables   << 'zebrafish_pipeline'
   #s.executables   << 'gatk_pipe_only_aws'
   #s.require_paths =  ["lib"]
 end
