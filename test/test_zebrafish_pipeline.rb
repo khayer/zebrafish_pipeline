@@ -7,7 +7,19 @@ describe ZebrafishPipeline do
     ZebrafishPipeline.new.must_be_instance_of ZebrafishPipeline
   end
 
-  it "can be created with a specific size" do
+  it "is not an Array" do
     ZebrafishPipeline.new.wont_be_instance_of Array
   end
+end
+
+describe Usage do
+  it "can be created with no arguments" do
+    Usage.new.must_be_instance_of Usage
+  end
+
+  it "has a method usage" do
+    puts Usage.new().usage
+    Usage.new()::usage.must_be_instance_of String
+  end
+
 end

@@ -1,3 +1,8 @@
+require 'zebrafish_pipeline/bwa_caller'
+require 'zebrafish_pipeline/usage'
+require 'zebrafish_pipeline/picard_caller'
+require 'zebrafish_pipeline/version'
+
 class ZebrafishPipeline
   attr_accessor :fwd, :rev
 
