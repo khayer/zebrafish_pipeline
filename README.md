@@ -9,8 +9,10 @@ This pipeline is suppose to automate all the necessary steps between raw sequenc
 ### Aligning the fastq files containing the raw sequenced data with bwa
 
 This gem is using the [Burrows-Wheeler Aligner](http://bio-bwa.sourceforge.net/)(BWA) to map the short reads back to the genome. This involves two steps:
-1) `bwa align`
-2) `bwa samse` for single- or `bwa sampe` for paired-end reads
+
+1. `bwa align`
+2. `bwa samse` for single- or `bwa sampe` for paired-end reads
+
 BWA is used with default settings.
 
 ### Bam-file Conversion/Sort/Index with Picard tools
