@@ -12,14 +12,28 @@ describe ZebrafishPipeline do
   end
 end
 
-describe Usage do
+describe Aligner do
   it "can be created with no arguments" do
-    Usage.new.must_be_instance_of Usage
+    Aligner.new.must_be_instance_of Aligner
   end
 
-  it "has a method usage" do
-    puts Usage.new().usage
-    Usage.new()::usage.must_be_instance_of String
+  it "is not an Array" do
+    Aligner.new.wont_be_instance_of Array
   end
 
+  it "it has a method add options" do
+    Aligner.add_options(Array.new).must_equal 5
+  end
 end
+
+#describe Usage do
+#  it "can be created with no arguments" do
+#    Usage.new.must_be_instance_of Usage
+#  end
+#
+#  it "has a method usage" do
+#    puts Usage.new().usage
+#    Usage.new()::usage.must_be_instance_of String
+#  end
+
+#end
