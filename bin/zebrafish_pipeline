@@ -57,12 +57,21 @@ when "align"
 
   Usage:  zebrafish_pipeline align <reference_bwa> -1 in.fq [-2 paired.fq]
 
-  align:
-    For sinle-end reads:
-      1) bwa aln <reference_bwa> in.fq -f in.sai
-      2) bwa samse <reference_bwa> in.sai in.fq -f in.sam
+  align ...
+    ... performs the following steps:
+      For sinle-end reads:
+        1) bwa aln <reference_bwa> in.fq -f in.sai
+        2) bwa samse <reference_bwa> in.sai in.fq -f in.sam
+
+      For paired-end reads:
+        1) bwa aln <reference_bwa> in.fq -f in.sai
+        1.1) bwa aln <reference_bwa> paired.fq -f paired.sai
+        2) bwa sampe <reference_bwa> in.sai paired.sai in.fq paired.fq -f in.sam
+
       3) java -jar SamFormatConverter.jar I=in.sam O=in.bam
-      4) java -jar
+      4) java -jar AddOrReplaceReadGroups.jar I=in.bam O=in_sorted_with_rg.bam SO=coordinate ID=1 LB=library PL=Illumina PU=Index SM=samplename
+      5) java -jar MarkDuplicates.jar I=WT_aligned_sorted_rg.bam O=WT_with_marked_dublicates.bam M=dublicate.metrcis AS=true
+      6) java -jar ~/Downloads/picard-tools-1.56/picard-tools-1.56/BuildBamIndex.jar I=WT_with_marked_dublicates.bam O=WT_with_marked_dublicates.bai
 
   Options:
 EOF
