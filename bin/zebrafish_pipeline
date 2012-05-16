@@ -141,8 +141,8 @@ EOF
   end
 
   aligner = Aligner.new
-  aligner.add_options(options)
-  aligner.run
+  #aligner.add_options(options)
+  aligner.run(options)
 
 when "variant"
   variant = true

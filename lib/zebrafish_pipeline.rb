@@ -1,6 +1,6 @@
 require 'zebrafish_pipeline/bwa_caller'
 require 'zebrafish_pipeline/picard_caller'
-require 'zebrafish_pipeline/version'
+#require 'zebrafish_pipeline/version'
 require 'zebrafish_pipeline/aligner'
 
 class ZebrafishPipeline

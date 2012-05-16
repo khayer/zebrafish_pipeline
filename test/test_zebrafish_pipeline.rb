@@ -22,7 +22,7 @@ describe Aligner do
   end
 
   it "it has a method add options" do
-    Aligner.add_options(Array.new).must_equal 5
+    Aligner.add_options(Array.new).must_equal true
   end
 end
 

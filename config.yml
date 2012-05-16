@@ -1,0 +1,9 @@
+# config.yml
+index_prefix: "/Users/hayer/Downloads/indexes/bwa_hg19"
+bwa: "bwa"
+samtools: "samtools"
+gatk: "/Users/hayer/Documents/GATK/dist/GenomeAnalysisTK.jar"
+annotation_file: "something"
+index_fa: "/Users/hayer/Downloads/indexes/ucsc.hg19.fasta"
+index_vcf: "/Users/hayer/Downloads/indexes/dbsnp_132.hg19.vcf"
+picard_tools: "/Users/hayer/Downloads/picard_tools-1.5/"
