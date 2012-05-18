@@ -158,7 +158,9 @@ EOF
   options = { :sam_file => nil,
     :output_dir => "prepared.bam", :gatk => nil,
     :bwa => nil, :account => "", :project => "",
-    :debug => 1, :cluster => false,
+    :debug => 1, :cluster => false, :library => "zebrafish_lib",
+    :id => nil, :platform => "Illumina", :index => nil,
+    :sample_name => nil
   }
 
   options[:sam_file] = ARGV[1]
@@ -172,6 +174,14 @@ EOF
 
     opts.on("-o","--output DIR", "Output Directory. Default: prepared.bam ") do |i|
       options[:output_dir] = i
+    end
+
+    opts.on("-m","--sample_name [name]", String,"Sample name") do |i|
+      options[:sample_name] = i if i
+    end
+
+    opts.on("-l","--library [name]", String,"Library used.") do |i|
+      options[:library] = i if i
     end
 
     opts.on("-s","--sge ", "Sun grid engine is available" ) do |i|
@@ -194,6 +204,18 @@ EOF
       options[:job_number] = i if i
     end
 
+    opts.on("-i","--id [read group id]", String,"Read group ID must be different for each sample") do |i|
+      options[:id] = i if i
+    end
+
+    opts.on("-z","--platform [name]", String,"Platform. Default: Illumina") do |i|
+      options[:platform] = i if i
+    end
+
+    opts.on("-x","--index [name]", String,"Barcode index of Illumina run") do |i|
+      options[:index] = i if i
+    end
+
     opts.on_tail("-h", "--help", "Show this message") do
       puts opts
       exit
@@ -202,7 +224,7 @@ EOF
 
   begin
     optparse.parse!
-    mandatory = [:sam_file, :job_number, :bwa, :picard_tools, :gatk]
+    mandatory = [:sam_file, :job_number, :bwa, :picard_tools, :gatk, :id, :index, :sample_name]
     missing = mandatory.select{ |param| options[param].nil? }
     if !missing.empty?
       puts "\n  Missing options given or missing in config_file: \n\t#{missing.join(",\n\t")}"
