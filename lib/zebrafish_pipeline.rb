@@ -2,6 +2,7 @@ require 'zebrafish_pipeline/bwa_caller'
 require 'zebrafish_pipeline/picard_caller'
 #require 'zebrafish_pipeline/version'
 require 'zebrafish_pipeline/aligner'
+require 'zebrafish_pipeline/preparer'
 
 class ZebrafishPipeline
   #attr_accessor :fwd, :rev
