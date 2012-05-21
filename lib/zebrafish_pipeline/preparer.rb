@@ -42,7 +42,7 @@ class Preparer
 
     cmd = PicardCaller.build_index(bam_file_sorted_dublicates,
       options[:picard_tools], log_file, job_prefix, options[:account])
-    excute(cmd)
+    execute(cmd)
 
   end
 
