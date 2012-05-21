@@ -18,27 +18,31 @@ class Preparer
     # tmp files for output
     job_number = options[:number]
     bam_file = "aligned_#{job_number}.bam"
+    bam_file_sorted = "sorted_#{job_number}.bam"
+    bam_file_sorted_dublicates = options[:output_dir]
+    dublicate_metrcis = "dublicate_#{job_number}.metrics"
+
     job_prefix = "#{job_number}"
     log_file = "#{job_number}.log"
 
-    @sai_file_1 = "#{random}_fwd.sai"
-    @sai_file_2 = "#{random}_rev.sai"
-    ## BWA : ALN
-    cmd = BwaCaller.call_aln(options[:read_1], options[:reference_bwa],
-      @sai_file_1, log_file, options[:bwa], job_prefix, options[:account],
-      options[:debug])
-    execute(cmd)
-    cmd = BwaCaller.call_aln(options[:read_2], options[:reference_bwa],
-      @sai_file_2, log_file, options[:bwa], job_prefix, options[:account],
-      options[:debug])
+
+    cmd = PicardCaller.convert(options[:sam_file], bam_file, options[:picard_tools],
+      log_file, job_prefix, options[:account])
     execute(cmd)
 
-    ## BWA : First step mapping reads to reference
-    cmd = BwaCaller.call_paired_end(options[:read_1], options[:read_2],
-      @sai_file_1, @sai_file_2, sam_file, options[:reference_bwa],
-      log_file, options[:bwa], job_prefix, options[:account],
-      options[:debug])
+    cmd = PicardCaller.rg_and_sorting(bam_file, bam_file_sorted, options[:picard_tools],
+      options[:library], options[:index], options[:sample_name],
+      log_file, job_prefix, options[:account])
     execute(cmd)
+
+    cmd = PicardCaller.mark_dublicates(bam_file_sorted, bam_file_sorted_dublicates,
+      dublicate_metrcis, options[:picard_tools], log_file, job_prefix,
+      options[:account])
+    execute(cmd)
+
+    cmd = PicardCaller.build_index(bam_file_sorted_dublicates,
+      options[:picard_tools], log_file, job_prefix, options[:account])
+    excute(cmd)
 
   end
 
