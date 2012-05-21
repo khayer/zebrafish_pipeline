@@ -10,13 +10,14 @@ class Preparer
   end
 
   def execute(cmd)
+    puts cmd
     status = system(cmd)
     raise cmd unless status
   end
 
   def run(options)
     # tmp files for output
-    job_number = options[:number]
+    job_number = options[:job_number]
     bam_file = "aligned_#{job_number}.bam"
     bam_file_sorted = "sorted_#{job_number}.bam"
     bam_file_sorted_dublicates = options[:output_dir]
